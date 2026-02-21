@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduPlay 🚀</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Baloo+2:wght@700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>emailjs.init("rdLUqNCG_-IQC0cnM");</script>
+  <style>
+    :root {
+      --purple: #7C3AED;
+      --pink:   #EC4899;
+      --yellow: #FBBF24;
+      --green:  #10B981;
+      --blue:   #3B82F6;
+      --orange: #F97316;
+      --red:    #EF4444;
+      --bg:     #F0F4FF;
+      --card:   #FFFFFF;
+      --text:   #1E1B4B;
+      --radius: 20px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ===== UTILITIES ===== */
+    .hidden { display: none !important; }
+    .page { display: none; min-height: 100vh; }
+    .page.active { display: block; }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(124,58,237,0.35);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo {
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.8rem;
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .logo span { filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); }
+    nav ul { list-style: none; display: flex; gap: 8px; }
+    nav ul li a {
+      color: rgba(255,255,255,0.9);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 8px 18px;
+      border-radius: 50px;
+      transition: all 0.2s;
+    }
+    nav ul li a:hover, nav ul li a.active {
+      background: rgba(255,255,255,0.25);
+      color: white;
+    }
+    .nav-auth { display: flex; gap: 10px; }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { background: white; color: var(--purple); }
+    .btn-solid {
+      background: var(--yellow);
+      border: none;
+      color: var(--text);
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 3px 10px rgba(251,191,36,0.4);
+    }
+    .btn-solid:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(251,191,36,0.5); }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f64f59 100%);
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      padding: 60px 20px;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 600px; height: 600px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      top: -200px; left: -200px;
+      animation: float 6s ease-in-out infinite;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 400px; height: 400px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 50%;
+      bottom: -150px; right: -100px;
+      animation: float 8s ease-in-out infinite reverse;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(10deg); }
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .hero-emoji { font-size: 5rem; animation: bounce 2s infinite; display: block; margin-bottom: 16px; }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    .hero h1 {
+      font-family: 'Baloo 2', cursive;
+      font-size: 3.5rem;
+      color: white;
+      line-height: 1.1;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      margin-bottom: 16px;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 32px;
+      font-weight: 600;
+    }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-hero-primary {
+      background: var(--yellow);
+      color: var(--text);
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 6px 25px rgba(251,191,36,0.5);
+      transition: all 0.25s;
+    }
+    .btn-hero-primary:hover { transform: translateY(-4px) scale(1.05); }
+    .btn-hero-secondary {
+      background: rgba(255,255,255,0.2);
+      color: white;
+      padding: 14px 36px;
+      border-radius: 50px;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border: 2px solid rgba(255,255,255,0.6);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-hero-secondary:hover { background: rgba(255,255,255,0.35); transform: translateY(-4px); }
+
+    /* ===== FEATURES SECTION ===== */
+    .features {
+      padding: 80px 32px;
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .section-title {
+      font-family: 'Baloo 2', cursive;
+      font-size: 2.4rem;
+      margin-bottom: 12px;
+      color: var(--purple);
+    }
+    .section-sub { font-size: 1.1rem; color: #6B7280; margin-bottom: 48px; font-weight: 600; }
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 32px 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .feature-card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 6px;
+    }
+    .fc1::before { background: linear-gradient(90deg, var(--purple), var(--pink)); }
+    .fc2::before { background: linear-gradient(90deg, var(--blue), var(--green)); }
+    .fc3::before { background: linear-gradient(90deg, var(--yellow), var(--orange)); }
+    .fc4::before { background: linear-gradient(90deg, var(--green), var(--blue)); }
+    .feature-icon { font-size: 3rem; margin-bottom: 14px; }
+    .feature-card h3 { font-family: 'Baloo 2', cursive; font-size: 1.3rem; margin-bottom: 8px; color: var(--text); }
+    .feature-card p { color: #6B7280; font-size: 0.95rem; line-height: 1.6; }
+
+    /* ===== ABOUT PAGE ===== */
+    .about-hero {
+      background: linear-gradient(135deg, #11998e, #38ef7d);
+      padding: 80px 32px;
+      text-align: center;
+      color: white;
+    }
+    .about-hero h1 { font-family: 'Baloo 2', cursive; font-size: 3rem; margin-bottom: 12px; }
+    .about-hero p { font-size: 1.15rem; opacity: 0.9; max-width: 600px; margin: 0 auto; font-weight: 600; }
+    .about-content {
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+    @media (max-width: 600px) { .about-content { grid-template-columns: 1fr; } }
+    .about-text h2 { font-family: 'Baloo 2', cursive; font-size: 1.8rem; color: var(--purple); margin-bottom: 16px; }
+    .about-text p { color: #374151; line-height: 1.8; font-size: 1rem; margin-bottom: 12px; }
+    .contact-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+    }
+    .contact-card h3 { font-family: 'Baloo 2', cursive; font-size: 1.4rem; margin-bottom: 20px; color: var(--purple); }
+    .info-item {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 16px; font-size: 1rem; font-weight: 600;
+    }
+    .info-icon {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .ii-purple { background: #EDE9FE; }
+    .ii-blue { background: #DBEAFE; }
+    .ii-green { background: #D1FAE5; }
+
+    /* ===== CONTACT PAGE ===== */
+    .contact-hero {
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      padding: 80px 32px;
+      text-align: center;
+      color: white;
+    }
+    .contact-hero h1 { font-family: 'Baloo 2', cursive; font-size: 3rem; margin-bottom: 12px; }
+    .contact-form-wrap {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 0 32px;
+    }
+    .contact-form-wrap h2 { font-family: 'Baloo 2', cursive; font-size: 1.8rem; color: var(--purple); margin-bottom: 24px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 2px solid #E5E7EB;
+      border-radius: 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--purple); }
+    .form-group textarea { resize: vertical; min-height: 120px; }
+    .btn-submit {
+      background: linear-gradient(135deg, var(--purple), var(--pink));
+      color: white;
+      border: none;
+      padding: 14px 40px;
+      border-radius: 50px;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      box-shadow: 0 6px 20px rgba(124,58,237,0.4);
+      width: 100%;
+    }
+    .btn-submit:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(124,58,237,0.5); }
+    .success-msg {
+      background: #D1FAE5;
+      border: 2px solid var(--green);
+      color: #065F46;
+      padding: 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-align: center;
+      margin-top: 16px;
+    }
+
+    /* ===== SUBSCRIPTION PAGE ===== */
+    .sub-hero {
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      padding: 80px 32px;
+      text-align: center;
+      color: white;
+    }
+    .sub-hero h1 { font-family: 'Baloo 2', cursive; font-size: 3rem; margin-bottom: 12px; }
+    .toggle-wrap {
+      display: flex; align-items: center; justify-content: center; gap: 16px;
+      margin: 40px auto 16px;
+    }
+    .toggle-label { font-weight: 700; font-size: 1rem; color: #374151; }
+    .toggle {
+      position: relative; width: 60px; height: 30px;
+      background: var(--purple); border-radius: 50px; cursor: pointer;
+      transition: background 0.3s;
+    }
+    .toggle::after {
+      content: '';
+      position: absolute;
+      width: 24px; height: 24px;
+      background: white;
+      border-radius: 50%;
+      top: 3px; left: 3px;
+      transition: transform 0.3s;
+    }
+    .toggle.annual::after { transform: translateX(30px); }
+    .badge-save {
+      background: var(--green); color: white;
+      font-size: 0.75rem; font-weight: 800;
+      padding: 2px 10px; border-radius: 50px;
+    }
+    .plans-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 0 auto 60px;
+      padding: 0 32px;
+    }
+    .plan-card {
+      background: white;
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      text-align: center;
+      position: relative;
+      transition: transform 0.25s;
+    }
+    .plan-card:hover { transform: translateY(-8px); }
+    .plan-card.featured {
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      color: white;
+    }
+    .plan-badge {
+      position: absolute;
+      top: -14px; left: 50%; transform: translateX(-50%);
+      background: var(--yellow);
+      color: var(--text);
+      font-size: 0.8rem; font-weight: 800;
+      padding: 4px 16px; border-radius: 50px;
+    }
+    .plan-name { font-family: 'Baloo 2', cursive; font-size: 1.5rem; margin-bottom: 8px; }
+    .plan-price { font-family: 'Baloo 2', cursive; font-size: 3rem; font-weight: 800; }
+    .plan-period { font-size: 0.9rem; opacity: 0.75; margin-bottom: 24px; font-weight: 600; }
+    .plan-features { list-style: none; text-align: left; margin-bottom: 28px; }
+    .plan-features li { padding: 6px 0; font-weight: 600; display: flex; gap: 10px; }
+    .btn-plan {
+      width: 100%;
+      padding: 12px;
+      border-radius: 50px;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-weight: 700;
+    }
+    .plan-card:not(.featured) .btn-plan {
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      color: white;
+    }
+    .plan-card.featured .btn-plan {
+      background: var(--yellow);
+      color: var(--text);
+    }
+    .btn-plan:hover { transform: scale(1.05); }
+    .payment-methods {
+      max-width: 600px;
+      margin: 0 auto 60px;
+      padding: 0 32px;
+      text-align: center;
+    }
+    .payment-methods h3 { font-family: 'Baloo 2', cursive; font-size: 1.5rem; margin-bottom: 20px; color: var(--purple); }
+    .pm-icons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .pm-icon {
+      background: white;
+      border: 2px solid #E5E7EB;
+      border-radius: 12px;
+      padding: 12px 24px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: flex; align-items: center; gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .pm-icon:hover { border-color: var(--purple); transform: translateY(-3px); }
+
+    /* ===== LOGIN/REGISTER ===== */
+    .auth-page {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      display: flex; align-items: center; justify-content: center;
+      padding: 40px 20px;
+    }
+    .auth-card {
+      background: white;
+      border-radius: 24px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    }
+    .auth-logo { text-align: center; font-family: 'Baloo 2', cursive; font-size: 2rem; margin-bottom: 8px; color: var(--purple); }
+    .auth-sub { text-align: center; color: #6B7280; font-weight: 600; margin-bottom: 28px; font-size: 0.95rem; }
+    .auth-tabs { display: flex; background: #F3F4F6; border-radius: 12px; padding: 4px; margin-bottom: 28px; }
+    .auth-tab {
+      flex: 1; padding: 10px; text-align: center;
+      font-weight: 800; font-size: 0.9rem;
+      border-radius: 8px; cursor: pointer;
+      transition: all 0.2s; color: #6B7280; border: none; background: transparent;
+      font-family: 'Nunito', sans-serif;
+    }
+    .auth-tab.active { background: white; color: var(--purple); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .social-btn {
+      width: 100%;
+      padding: 12px;
+      border-radius: 12px;
+      border: 2px solid #E5E7EB;
+      background: white;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-bottom: 10px;
+      transition: all 0.2s;
+    }
+    .social-btn:hover { border-color: var(--purple); background: #F5F3FF; transform: translateY(-2px); }
+    .divider { text-align: center; color: #9CA3AF; font-weight: 600; margin: 16px 0; font-size: 0.85rem; position: relative; }
+    .divider::before, .divider::after {
+      content: ''; position: absolute; top: 50%;
+      width: 40%; height: 1px; background: #E5E7EB;
+    }
+    .divider::before { left: 0; } .divider::after { right: 0; }
+    .btn-auth {
+      width: 100%;
+      padding: 14px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      color: white;
+      border: none;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin-top: 8px;
+    }
+    .btn-auth:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(124,58,237,0.5); }
+
+    /* ===== DASHBOARD ===== */
+    .dashboard-header {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--blue) 100%);
+      padding: 32px;
+      color: white;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: gap;
+    }
+    .dash-welcome { font-family: 'Baloo 2', cursive; font-size: 1.8rem; }
+    .dash-welcome span { font-size: 1rem; font-weight: 600; opacity: 0.85; display: block; margin-top: 2px; }
+    .progress-bar-wrap { background: rgba(255,255,255,0.2); border-radius: 50px; height: 12px; width: 200px; overflow: hidden; }
+    .progress-bar-fill { background: var(--yellow); height: 100%; border-radius: 50px; width: 45%; transition: width 0.8s; }
+    .progress-label { font-size: 0.85rem; opacity: 0.85; margin-top: 4px; font-weight: 600; }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 24px;
+      max-width: 900px;
+      margin: 60px auto;
+      padding: 0 32px;
+    }
+    .option-card {
+      background: white;
+      border-radius: 24px;
+      padding: 36px 20px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .option-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 5px;
+    }
+    .oc1::before { background: linear-gradient(90deg, var(--purple), var(--pink)); }
+    .oc2::before { background: linear-gradient(90deg, var(--blue), var(--green)); }
+    .oc3::before { background: linear-gradient(90deg, var(--yellow), var(--orange)); }
+    .oc4::before { background: linear-gradient(90deg, var(--green), var(--blue)); }
+    .oc5::before { background: linear-gradient(90deg, var(--pink), var(--red)); }
+    .oc6::before { background: linear-gradient(90deg, var(--orange), var(--yellow)); }
+    .option-card:hover { transform: translateY(-10px) scale(1.03); box-shadow: 0 16px 40px rgba(0,0,0,0.15); }
+    .option-icon { font-size: 3.5rem; margin-bottom: 12px; }
+    .option-card h3 { font-family: 'Baloo 2', cursive; font-size: 1.1rem; color: var(--text); margin-bottom: 6px; }
+    .option-card p { font-size: 0.82rem; color: #9CA3AF; font-weight: 600; }
+    .btn-logout {
+      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.5);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    .btn-logout:hover { background: rgba(255,255,255,0.35); }
+
+    /* ===== TOPIC PAGE ===== */
+    .topic-header {
+      background: linear-gradient(135deg, #f093fb, #f5576c);
+      padding: 48px 32px;
+      color: white;
+      text-align: center;
+    }
+    .topic-header h1 { font-family: 'Baloo 2', cursive; font-size: 2.5rem; margin-bottom: 8px; }
+    .topic-header p { opacity: 0.9; font-weight: 600; }
+    .btn-back {
+      background: rgba(255,255,255,0.2);
+      border: 2px solid rgba(255,255,255,0.6);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+    }
+    .tabs-nav {
+      display: flex;
+      max-width: 700px;
+      margin: 32px auto 0;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50px;
+      padding: 6px;
+      gap: 6px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: 50px;
+      border: none;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.25s;
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+    }
+    .tab-btn.active { background: white; color: var(--purple); }
+
+    .tab-content { max-width: 760px; margin: 40px auto; padding: 0 32px 60px; }
+    .learn-card {
+      background: white;
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      line-height: 1.8;
+    }
+    .learn-card h2 { font-family: 'Baloo 2', cursive; font-size: 1.6rem; color: var(--purple); margin-bottom: 16px; }
+    .learn-card p { color: #374151; margin-bottom: 14px; font-size: 1rem; }
+    .learn-card ul { padding-left: 24px; color: #374151; }
+    .learn-card li { margin-bottom: 8px; }
+    .info-box {
+      background: #EDE9FE;
+      border-left: 5px solid var(--purple);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin: 20px 0;
+      font-weight: 700;
+      color: var(--purple);
+    }
+
+    /* ===== QUIZ ===== */
+    .quiz-score-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      background: white;
+      border-radius: 16px;
+      padding: 16px 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      font-weight: 700;
+    }
+    .score-correct { color: var(--green); font-family: 'Baloo 2', cursive; font-size: 1.2rem; }
+    .score-wrong { color: var(--red); font-family: 'Baloo 2', cursive; font-size: 1.2rem; }
+    .score-total { color: #6B7280; font-size: 0.9rem; }
+    .quiz-card {
+      background: white;
+      border-radius: 20px;
+      padding: 36px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    .question-num {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--purple);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+    .question-text { font-family: 'Baloo 2', cursive; font-size: 1.4rem; color: var(--text); margin-bottom: 28px; line-height: 1.4; }
+    .answers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    @media (max-width: 500px) { .answers-grid { grid-template-columns: 1fr; } }
+    .answer-btn {
+      padding: 16px;
+      border: 3px solid #E5E7EB;
+      border-radius: 16px;
+      background: white;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: left;
+    }
+    .answer-btn:hover:not(:disabled) { border-color: var(--purple); background: #F5F3FF; transform: translateY(-2px); }
+    .answer-btn.correct { border-color: var(--green); background: #D1FAE5; color: #065F46; }
+    .answer-btn.wrong { border-color: var(--red); background: #FEE2E2; color: #991B1B; }
+    .answer-btn:disabled { cursor: default; }
+    .feedback {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      text-align: center;
+      font-size: 1.05rem;
+    }
+    .feedback.correct { background: #D1FAE5; color: #065F46; }
+    .feedback.wrong { background: #FEE2E2; color: #991B1B; }
+    .btn-next {
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--purple), var(--blue));
+      color: white;
+      border: none;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-next:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(124,58,237,0.4); }
+
+    .quiz-done {
+      text-align: center;
+      padding: 48px 20px;
+    }
+    .quiz-done h2 { font-family: 'Baloo 2', cursive; font-size: 2.5rem; color: var(--purple); margin-bottom: 12px; }
+    .quiz-done .big-emoji { font-size: 5rem; display: block; margin-bottom: 16px; animation: bounce 1.5s infinite; }
+    .result-stat { font-size: 1.1rem; font-weight: 700; color: #374151; margin-bottom: 8px; }
+    .btn-retry {
+      margin-top: 24px;
+      padding: 14px 40px;
+      border-radius: 50px;
+      background: linear-gradient(135deg, var(--yellow), var(--orange));
+      color: white;
+      border: none;
+      font-family: 'Baloo 2', cursive;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(249,115,22,0.4);
+    }
+    .btn-retry:hover { transform: scale(1.05); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 28px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    footer strong { color: white; }
+
+    /* confetti */
+    @keyframes confetti-fall {
+      0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+    .confetti-piece {
+      position: fixed;
+      width: 10px; height: 10px;
+      border-radius: 2px;
+      animation: confetti-fall linear forwards;
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- NAV (public) -->
+<!-- ============================================================ -->
+<nav id="public-nav">
+  <div class="logo" onclick="showPage('home')">🚀 <span>EduPlay</span></div>
+  <ul>
+    <li><a href="#" onclick="showPage('home')" id="nav-home">Inicio</a></li>
+    <li><a href="#" onclick="showPage('about')" id="nav-about">Sobre nosotros</a></li>
+    <li><a href="#" onclick="showPage('contact')" id="nav-contact">Contacto</a></li>
+    <li><a href="#" onclick="showPage('subscription')" id="nav-sub">Suscripción</a></li>
+  </ul>
+  <div class="nav-auth">
+    <button class="btn-outline" onclick="showPage('auth'); setAuthTab('login')">Iniciar sesión</button>
+    <button class="btn-solid" onclick="showPage('auth'); setAuthTab('register')">Registrarse</button>
+  </div>
+</nav>
+
+<!-- NAV (private) -->
+<nav id="private-nav" class="hidden">
+  <div class="logo" onclick="showPage('dashboard')">🚀 <span>EduPlay</span></div>
+  <div style="display:flex;align-items:center;gap:16px;">
+    <span style="color:rgba(255,255,255,0.85);font-weight:700;" id="user-greeting">¡Hola! 👋</span>
+    <button class="btn-logout" onclick="logout()">Cerrar sesión</button>
+  </div>
+</nav>
+
+<!-- ============================================================ -->
+<!-- PAGE: HOME -->
+<!-- ============================================================ -->
+<div class="page active" id="page-home">
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-emoji">🎓</span>
+      <h1>Aprende jugando,<br>crece sonriendo</h1>
+      <p>La plataforma de aprendizaje más divertida para niños y jóvenes. ¡Supera retos, gana puntos y conviértete en un experto!</p>
+      <div class="hero-btns">
+        <button class="btn-hero-primary" onclick="showPage('auth'); setAuthTab('register')">¡Empieza gratis! 🎉</button>
+        <button class="btn-hero-secondary" onclick="showPage('about')">Saber más</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <h2 class="section-title">¿Por qué EduPlay? 🌟</h2>
+    <p class="section-sub">Aprender nunca había sido tan divertido</p>
+    <div class="cards-grid">
+      <div class="feature-card fc1">
+        <div class="feature-icon">🎮</div>
+        <h3>Aprende jugando</h3>
+        <p>Tests interactivos con imágenes y preguntas dinámicas que hacen que el aprendizaje sea una aventura.</p>
+      </div>
+      <div class="feature-card fc2">
+        <div class="feature-icon">📊</div>
+        <h3>Sigue tu progreso</h3>
+        <p>Visualiza cuánto has mejorado y descubre en qué temas necesitas más práctica.</p>
+      </div>
+      <div class="feature-card fc3">
+        <div class="feature-icon">🏆</div>
+        <h3>Gana insignias</h3>
+        <p>Supera niveles y colecciona logros que demuestran tu esfuerzo y dedicación.</p>
+      </div>
+      <div class="feature-card fc4">
+        <div class="feature-icon">🔒</div>
+        <h3>Seguro y privado</h3>
+        <p>Plataforma diseñada con la seguridad de los más jóvenes como prioridad absoluta.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>Hecho con ❤️ por <strong>EduPlay</strong> &copy; 2025 · Todos los derechos reservados</footer>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: ABOUT -->
+<!-- ============================================================ -->
+<div class="page" id="page-about">
+  <div class="about-hero">
+    <h1>🌱 Sobre Nosotros</h1>
+    <p>Conoce nuestra misión y el equipo detrás de EduPlay</p>
+  </div>
+  <div class="about-content">
+    <div class="about-text">
+      <h2>Nuestra misión</h2>
+      <p>En <strong>EduPlay</strong> creemos que el aprendizaje debe ser una experiencia emocionante, no una obligación. Hemos diseñado una plataforma donde niños y jóvenes de hasta 16 años pueden explorar distintas materias a través de contenido interactivo, tests divertidos y un sistema de progreso que premia el esfuerzo.</p>
+      <p>Cada módulo ha sido cuidadosamente elaborado para adaptarse al currículo escolar, combinando explicaciones claras con ejercicios que refuerzan lo aprendido de forma natural y motivadora.</p>
+      <div class="info-box">🎯 Nuestra meta: hacer que cada alumno alcance su máximo potencial disfrutando del proceso.</div>
+      <p>Nos comprometemos con la privacidad y seguridad de los más jóvenes. Todos los datos se gestionan con las máximas garantías de protección.</p>
+    </div>
+    <div>
+      <div class="contact-card">
+        <h3>📋 Datos de contacto</h3>
+        <div class="info-item">
+          <div class="info-icon ii-purple">👤</div>
+          <div>
+            <div style="font-size:0.8rem;color:#9CA3AF;font-weight:600;">Responsable</div>
+            <div>Nombre Apellido Apellido</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon ii-blue">📞</div>
+          <div>
+            <div style="font-size:0.8rem;color:#9CA3AF;font-weight:600;">Teléfono</div>
+            <div>+34 600 000 000</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon ii-green">📍</div>
+          <div>
+            <div style="font-size:0.8rem;color:#9CA3AF;font-weight:600;">Dirección</div>
+            <div>Calle Ejemplo, 00<br>00000 Ciudad, España</div>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon ii-purple">✉️</div>
+          <div>
+            <div style="font-size:0.8rem;color:#9CA3AF;font-weight:600;">Email</div>
+            <div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0b62656d644b66627b797e6e696a25686466">[email&#160;protected]</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer>Hecho con ❤️ por <strong>EduPlay</strong> &copy; 2025</footer>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: CONTACT -->
+<!-- ============================================================ -->
+<div class="page" id="page-contact">
+  <div class="contact-hero">
+    <h1>✉️ Contacto</h1>
+    <p>¿Tienes alguna duda o sugerencia? ¡Escríbenos!</p>
+  </div>
+  <div class="contact-form-wrap">
+    <h2>Envíanos un mensaje</h2>
+    <div class="form-group">
+      <label for="cf-name">👤 Nombre completo</label>
+      <input type="text" id="cf-name" placeholder="Tu nombre" />
+    </div>
+    <div class="form-group">
+      <label for="cf-email">📧 Correo electrónico</label>
+      <input type="email" id="cf-email" placeholder="tu@email.com" />
+    </div>
+    <div class="form-group">
+      <label for="cf-msg">💬 Consulta</label>
+      <textarea id="cf-msg" placeholder="Escribe aquí tu mensaje..."></textarea>
+    </div>
+    <button class="btn-submit" onclick="sendContact()">Enviar mensaje 🚀</button>
+    <div id="contact-success" class="success-msg hidden">✅ ¡Mensaje enviado! Te responderemos pronto.</div>
+  </div>
+  <footer>Hecho con ❤️ por <strong>EduPlay</strong> &copy; 2025</footer>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: SUBSCRIPTION -->
+<!-- ============================================================ -->
+<div class="page" id="page-subscription">
+  <div class="sub-hero">
+    <h1>⭐ Planes y Precios</h1>
+    <p>Elige el plan que mejor se adapte a ti</p>
+  </div>
+  <div style="padding:40px 32px 0;max-width:900px;margin:0 auto;">
+    <div class="toggle-wrap">
+      <span class="toggle-label">Mensual</span>
+      <div class="toggle" id="billing-toggle" onclick="toggleBilling()"></div>
+      <span class="toggle-label">Anual <span class="badge-save">-30%</span></span>
+    </div>
+  </div>
+  <div class="plans-grid" style="margin-top:32px;">
+    <div class="plan-card">
+      <div class="plan-name">🌱 Básico</div>
+      <div class="plan-price" id="price-basic">4,99€</div>
+      <div class="plan-period" id="period-basic">al mes</div>
+      <ul class="plan-features">
+        <li>✅ Acceso a 3 temas</li>
+        <li>✅ Tests ilimitados</li>
+        <li>✅ Seguimiento de progreso</li>
+        <li>❌ Sin contenido premium</li>
+      </ul>
+      <button class="btn-plan" onclick="selectPlan('Básico')">Empezar ahora</button>
+    </div>
+    <div class="plan-card featured">
+      <div class="plan-badge">⭐ MÁS POPULAR</div>
+      <div class="plan-name">🚀 Premium</div>
+      <div class="plan-price" id="price-premium">9,99€</div>
+      <div class="plan-period" id="period-premium">al mes</div>
+      <ul class="plan-features">
+        <li>✅ Acceso a todos los temas</li>
+        <li>✅ Tests ilimitados</li>
+        <li>✅ Seguimiento de progreso</li>
+        <li>✅ Contenido exclusivo</li>
+        <li>✅ Insignias y logros</li>
+        <li>✅ Soporte prioritario</li>
+      </ul>
+      <button class="btn-plan" onclick="selectPlan('Premium')">Empezar ahora</button>
+    </div>
+  </div>
+  <div class="payment-methods">
+    <h3>Métodos de pago aceptados</h3>
+    <div class="pm-icons">
+      <div class="pm-icon">💳 Tarjeta de crédito</div>
+      <div class="pm-icon">🅿️ PayPal</div>
+      <div class="pm-icon">📱 Bizum</div>
+    </div>
+    <p style="margin-top:16px;color:#9CA3AF;font-size:0.85rem;font-weight:600;">Pago seguro. Cancela cuando quieras. Sin permanencia.</p>
+  </div>
+  <footer>Hecho con ❤️ por <strong>EduPlay</strong> &copy; 2025</footer>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: AUTH -->
+<!-- ============================================================ -->
+<div class="page" id="page-auth">
+  <div class="auth-page">
+    <div class="auth-card">
+      <div class="auth-logo">🚀 EduPlay</div>
+      <div class="auth-sub" id="auth-sub-text">Únete a miles de estudiantes</div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-login" onclick="setAuthTab('login')">Iniciar sesión</button>
+        <button class="auth-tab" id="tab-register" onclick="setAuthTab('register')">Registrarse</button>
+      </div>
+
+      <!-- Social buttons -->
+      <button class="social-btn" onclick="socialLogin('Google')">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+        Continuar con Google
+      </button>
+      <button class="social-btn" onclick="socialLogin('Facebook')">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        Continuar con Facebook
+      </button>
+      <button class="social-btn" onclick="socialLogin('Apple')">
+        <svg width="18" height="18" viewBox="0 0 24 24"><path fill="#000" d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        Continuar con Apple
+      </button>
+
+      <div class="divider">o con correo electrónico</div>
+
+      <div id="register-fields" class="hidden">
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" id="reg-name" placeholder="Tu nombre" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Correo electrónico</label>
+        <input type="email" id="auth-email" placeholder="tu@email.com" />
+      </div>
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" id="auth-pass" placeholder="••••••••" />
+      </div>
+      <div id="confirm-pass-group" class="form-group hidden">
+        <label>Confirmar contraseña</label>
+        <input type="password" id="auth-pass2" placeholder="••••••••" />
+      </div>
+
+      <button class="btn-auth" id="auth-btn" onclick="doAuth()">Iniciar sesión</button>
+      <div id="auth-error" style="color:#EF4444;font-weight:700;text-align:center;margin-top:12px;font-size:0.9rem;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: DASHBOARD -->
+<!-- ============================================================ -->
+<div class="page" id="page-dashboard">
+  <div class="dashboard-header">
+    <div>
+      <div class="dash-welcome" id="dash-name">¡Hola, Estudiante! 👋</div>
+      <span>Listo para aprender hoy?</span>
+    </div>
+    <div style="text-align:right;">
+      <div style="font-size:0.85rem;margin-bottom:6px;opacity:0.85;font-weight:700;">Tu progreso general</div>
+      <div class="progress-bar-wrap"><div class="progress-bar-fill" id="dash-progress"></div></div>
+      <div class="progress-label" id="dash-progress-label">45% completado</div>
+    </div>
+  </div>
+  <div style="text-align:center;padding:40px 32px 0;">
+    <h2 class="section-title">¿Qué quieres aprender hoy? 📚</h2>
+    <p class="section-sub">Elige un tema y ¡a por ello!</p>
+  </div>
+  <div class="options-grid">
+    <div class="option-card oc1" onclick="showTopic(1)">
+      <div class="option-icon">🔢</div>
+      <h3>Matemáticas</h3>
+      <p>Números y operaciones</p>
+    </div>
+    <div class="option-card oc2" onclick="showTopic(2)">
+      <div class="option-icon">🔬</div>
+      <h3>Ciencias</h3>
+      <p>El mundo natural</p>
+    </div>
+    <div class="option-card oc3" onclick="showTopic(3)">
+      <div class="option-icon">📖</div>
+      <h3>Lengua</h3>
+      <p>Gramática y literatura</p>
+    </div>
+    <div class="option-card oc4" onclick="showTopic(4)">
+      <div class="option-icon">🌍</div>
+      <h3>Historia</h3>
+      <p>Pasado y presente</p>
+    </div>
+    <div class="option-card oc5" onclick="showTopic(5)">
+      <div class="option-icon">🌐</div>
+      <h3>Inglés</h3>
+      <p>Idioma universal</p>
+    </div>
+    <div class="option-card oc6" onclick="showTopic(6)">
+      <div class="option-icon">🎨</div>
+      <h3>Arte</h3>
+      <p>Creatividad y cultura</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- PAGE: TOPIC -->
+<!-- ============================================================ -->
+<div class="page" id="page-topic">
+  <div class="topic-header">
+    <button class="btn-back" onclick="showPage('dashboard')">← Volver</button>
+    <h1 id="topic-title">Matemáticas</h1>
+    <p id="topic-desc">Explora y aprende</p>
+    <div class="tabs-nav">
+      <button class="tab-btn active" id="tab-aprende" onclick="switchTab('aprende')">📚 Aprende</button>
+      <button class="tab-btn" id="tab-juega" onclick="switchTab('juega')">🎮 Juega</button>
+    </div>
+  </div>
+
+  <!-- APRENDE -->
+  <div class="tab-content" id="content-aprende">
+    <div class="learn-card" id="learn-content">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+  <!-- JUEGA -->
+  <div class="tab-content hidden" id="content-juega">
+    <div class="quiz-score-bar">
+      <div><span class="score-correct">✅ <span id="score-correct">0</span></span> correctas</div>
+      <div class="score-total">Pregunta <span id="q-current">1</span> de <span id="q-total">5</span></div>
+      <div><span class="score-wrong">❌ <span id="score-wrong">0</span></span> errores</div>
+    </div>
+    <div id="quiz-container">
+      <!-- quiz or done screen -->
+    </div>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SCRIPTS -->
+<!-- ============================================================ -->
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // ---- STATE ----
+  let currentUser = null;
+  let billingAnnual = false;
+  let currentTopic = 1;
+  let currentTab = 'aprende';
+  let quizState = {};
+
+  // Simulated user DB
+  const users = {};
+
+  // ---- TOPICS DATA ----
+  const topics = {
+    1: {
+      name: 'Matemáticas', emoji: '🔢', desc: 'Números, operaciones y mucho más',
+      learn: `
+        <h2>🔢 Las Fracciones</h2>
+        <p>Una <strong>fracción</strong> representa una parte de un todo. Se escribe como dos números separados por una línea horizontal: el número de arriba se llama <strong>numerador</strong> y el de abajo <strong>denominador</strong>.</p>
+        <div class="info-box">📌 Ejemplo: En la fracción 3/4, el numerador es 3 y el denominador es 4. Significa "3 partes de 4 partes iguales".</div>
+        <p>Cuando el numerador y el denominador son iguales, la fracción equivale a 1 entero. Por ejemplo: 4/4 = 1.</p>
+        <h2 style="margin-top:24px;">Tipos de fracciones</h2>
+        <ul>
+          <li><strong>Propias:</strong> el numerador es menor que el denominador (ej: 2/5).</li>
+          <li><strong>Impropias:</strong> el numerador es mayor o igual (ej: 7/3).</li>
+          <li><strong>Mixtas:</strong> combinan un entero y una fracción propia (ej: 2 y 1/3).</li>
+        </ul>
+        <p style="margin-top:16px;">Para sumar fracciones con el mismo denominador, simplemente sumamos los numeradores y mantenemos el denominador.</p>
+      `,
+      questions: [
+        { q: '¿Cuál es el numerador de la fracción 3/7?', opts: ['7', '3', '4', '10'], correct: 1 },
+        { q: '¿Cuánto es 1/4 + 1/4?', opts: ['2/4', '1/8', '2/8', '3/4'], correct: 0 },
+        { q: '¿Qué tipo de fracción es 8/3?', opts: ['Propia', 'Impropia', 'Mixta', 'Entera'], correct: 1 },
+        { q: '¿Cuánto es 3/3?', opts: ['0', '1/3', '1', '3'], correct: 2 },
+        { q: '¿Cuál fracción es mayor?', opts: ['1/2', '1/3', '1/4', '1/8'], correct: 0 },
+      ]
+    },
+    2: {
+      name: 'Ciencias', emoji: '🔬', desc: 'Descubre cómo funciona el mundo',
+      learn: `
+        <h2>🌿 La Fotosíntesis</h2>
+        <p>La <strong>fotosíntesis</strong> es el proceso por el cual las plantas fabrican su propio alimento utilizando la energía del sol, el agua y el dióxido de carbono (CO₂).</p>
+        <div class="info-box">☀️ Fórmula simplificada: CO₂ + Agua + Luz solar → Glucosa + Oxígeno</div>
+        <p>Este proceso ocurre principalmente en las hojas, dentro de unas estructuras llamadas <strong>cloroplastos</strong>, que contienen un pigmento verde llamado <strong>clorofila</strong>.</p>
+        <h2 style="margin-top:24px;">¿Por qué es importante?</h2>
+        <ul>
+          <li>Produce el oxígeno que respiramos.</li>
+          <li>Es la base de casi todas las cadenas alimentarias.</li>
+          <li>Ayuda a reducir el CO₂ de la atmósfera.</li>
+        </ul>
+      `,
+      questions: [
+        { q: '¿Qué gas producen las plantas durante la fotosíntesis?', opts: ['CO₂', 'Nitrógeno', 'Oxígeno', 'Hidrógeno'], correct: 2 },
+        { q: '¿Qué pigmento da el color verde a las hojas?', opts: ['Melanina', 'Clorofila', 'Beta-caroteno', 'Xantofila'], correct: 1 },
+        { q: '¿Dónde ocurre la fotosíntesis?', opts: ['Raíces', 'Tallo', 'Cloroplastos', 'Flores'], correct: 2 },
+        { q: '¿Qué necesitan las plantas para hacer la fotosíntesis?', opts: ['Solo agua', 'Luz, agua y CO₂', 'Solo luz solar', 'Tierra y fertilizantes'], correct: 1 },
+      ]
+    },
+    3: {
+      name: 'Lengua', emoji: '📖', desc: 'Gramática y expresión',
+      learn: `
+        <h2>📝 Los Adjetivos</h2>
+        <p>El <strong>adjetivo</strong> es la palabra que acompaña al sustantivo para indicar alguna de sus cualidades o características. Siempre concuerda con el sustantivo en género y número.</p>
+        <div class="info-box">✏️ Ejemplo: "El gato <strong>negro</strong>" → negro es el adjetivo que describe al gato.</div>
+        <p>Existen diferentes tipos de adjetivos: calificativos (describen cualidades), determinativos (delimitan al sustantivo), numerales, posesivos, demostrativos...</p>
+        <h2 style="margin-top:24px;">Grados del adjetivo</h2>
+        <ul>
+          <li><strong>Positivo:</strong> expresa la cualidad sin comparación (alto).</li>
+          <li><strong>Comparativo:</strong> compara dos elementos (más alto que).</li>
+          <li><strong>Superlativo:</strong> expresa el grado máximo (altísimo / el más alto).</li>
+        </ul>
+      `,
+      questions: [
+        { q: '¿Cuál es el adjetivo en "casa grande"?', opts: ['casa', 'grande', 'la', 'es'], correct: 1 },
+        { q: '¿Cuál es el superlativo de "bueno"?', opts: ['más bueno', 'buenísimo', 'muy bueno', 'bonísimo'], correct: 1 },
+        { q: 'El adjetivo concuerda con el sustantivo en...', opts: ['Tiempo y modo', 'Género y número', 'Persona y número', 'Caso y género'], correct: 1 },
+        { q: '¿Qué tipo de adjetivo es "mi" en "mi libro"?', opts: ['Calificativo', 'Demostrativo', 'Posesivo', 'Numeral'], correct: 2 },
+        { q: '"Altísimo" es un grado...', opts: ['Positivo', 'Comparativo', 'Superlativo', 'Relativo'], correct: 2 },
+      ]
+    },
+    4: {
+      name: 'Historia', emoji: '🌍', desc: 'Viaja al pasado',
+      learn: `
+        <h2>🏛️ El Imperio Romano</h2>
+        <p>El <strong>Imperio Romano</strong> fue una de las civilizaciones más poderosas de la historia. Comenzó en el año 27 a.C. con Augusto como primer emperador y duró hasta el 476 d.C. en Occidente.</p>
+        <div class="info-box">🗺️ En su apogeo, el Imperio Romano abarcaba desde la Península Ibérica hasta Mesopotamia.</div>
+        <p>Los romanos aportaron grandes avances: el derecho romano (base del derecho moderno), la ingeniería (acueductos, calzadas, el Coliseo), el latín (origen de las lenguas románicas) y un eficaz sistema político y militar.</p>
+        <h2 style="margin-top:24px;">Datos clave</h2>
+        <ul>
+          <li>Capital: Roma (Italia actual).</li>
+          <li>Lengua oficial: latín.</li>
+          <li>Religión: politeísta primero, cristiana después.</li>
+          <li>Ejército: las legiones romanas, temidas en todo el mundo conocido.</li>
+        </ul>
+      `,
+      questions: [
+        { q: '¿Cuándo comenzó el Imperio Romano?', opts: ['476 a.C.', '27 a.C.', '44 d.C.', '100 d.C.'], correct: 1 },
+        { q: '¿Quién fue el primer emperador romano?', opts: ['Julio César', 'Nerón', 'Augusto', 'Trajano'], correct: 2 },
+        { q: '¿Qué lengua hablaban los romanos?', opts: ['Griego', 'Etrusco', 'Latín', 'Íbero'], correct: 2 },
+        { q: '¿En qué año cayó el Imperio Romano de Occidente?', opts: ['27 a.C.', '100 d.C.', '476 d.C.', '1453 d.C.'], correct: 2 },
+      ]
+    },
+    5: {
+      name: 'Inglés', emoji: '🌐', desc: 'Learn the world\'s language',
+      learn: `
+        <h2>🇬🇧 Present Simple vs Present Continuous</h2>
+        <p>El <strong>Present Simple</strong> se usa para hablar de hábitos, rutinas y hechos generales. Ejemplo: <em>"She reads every day."</em></p>
+        <p>El <strong>Present Continuous</strong> se usa para acciones que ocurren ahora mismo o en este período. Se forma con el verbo <em>to be</em> + verbo en -ing. Ejemplo: <em>"She is reading now."</em></p>
+        <div class="info-box">💡 Palabras clave Present Simple: always, usually, never, every day.<br>Palabras clave Present Continuous: now, at the moment, today, this week.</div>
+        <h2 style="margin-top:24px;">Ejemplos comparados</h2>
+        <ul>
+          <li><em>I eat pizza on Fridays.</em> (hábito) vs <em>I am eating pizza now.</em> (ahora)</li>
+          <li><em>She works in a school.</em> (rutina) vs <em>She is working from home today.</em> (temporal)</li>
+        </ul>
+      `,
+      questions: [
+        { q: 'Which sentence uses Present Simple?', opts: ['She is sleeping now.', 'They are playing football.', 'He reads every day.', 'We are studying.'], correct: 2 },
+        { q: 'Complete: "I ___ TV at the moment."', opts: ['watch', 'am watching', 'watched', 'watches'], correct: 1 },
+        { q: 'Which word is a clue for Present Continuous?', opts: ['always', 'never', 'now', 'usually'], correct: 2 },
+        { q: '"They play tennis every Sunday." This is a...', opts: ['habit', 'action now', 'past action', 'future plan'], correct: 0 },
+        { q: 'Correct form: "She ___ (study) for her exam right now."', opts: ['studies', 'studied', 'is studying', 'study'], correct: 2 },
+      ]
+    },
+    6: {
+      name: 'Arte', emoji: '🎨', desc: 'Creatividad y expresión',
+      learn: `
+        <h2>🎨 Los Colores Primarios y Secundarios</h2>
+        <p>Los <strong>colores primarios</strong> son aquellos que no pueden obtenerse mezclando otros colores: <strong>rojo, azul y amarillo</strong>. Son la base de todos los demás colores.</p>
+        <div class="info-box">🎨 Mezclando dos colores primarios obtenemos un color secundario.</div>
+        <p>Los <strong>colores secundarios</strong> son: <strong>naranja</strong> (rojo + amarillo), <strong>verde</strong> (azul + amarillo) y <strong>violeta</strong> (rojo + azul).</p>
+        <h2 style="margin-top:24px;">El círculo cromático</h2>
+        <p>El círculo cromático es una representación circular de los colores que ayuda a entender las relaciones entre ellos. Los colores opuestos en el círculo se llaman <strong>complementarios</strong> y crean fuertes contrastes cuando se usan juntos.</p>
+        <ul>
+          <li>Rojo ↔ Verde</li>
+          <li>Azul ↔ Naranja</li>
+          <li>Amarillo ↔ Violeta</li>
+        </ul>
+      `,
+      questions: [
+        { q: '¿Cuáles son los colores primarios?', opts: ['Rojo, verde y azul', 'Rojo, azul y amarillo', 'Naranja, verde y violeta', 'Negro, blanco y gris'], correct: 1 },
+        { q: '¿Qué color obtienes al mezclar rojo y amarillo?', opts: ['Violeta', 'Verde', 'Naranja', 'Marrón'], correct: 2 },
+        { q: '¿Qué son los colores complementarios?', opts: ['Colores iguales', 'Colores opuestos en el círculo cromático', 'Colores similares', 'Colores primarios'], correct: 1 },
+        { q: '¿Cuántos colores primarios existen?', opts: ['2', '4', '3', '6'], correct: 2 },
+      ]
+    }
+  };
+
+  // ---- NAVIGATION ----
+  function showPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + page).classList.add('active');
+
+    const isPrivate = (page === 'dashboard' || page === 'topic');
+    document.getElementById('public-nav').classList.toggle('hidden', isPrivate);
+    document.getElementById('private-nav').classList.toggle('hidden', !isPrivate);
+
+    // Update nav active
+    ['home','about','contact','subscription'].forEach(n => {
+      const el = document.getElementById('nav-'+n);
+      if (el) el.classList.toggle('active', n === page);
+    });
+    window.scrollTo(0, 0);
+  }
+
+  // ---- AUTH ----
+  function setAuthTab(tab) {
+    const isLogin = tab === 'login';
+    document.getElementById('tab-login').classList.toggle('active', isLogin);
+    document.getElementById('tab-register').classList.toggle('active', !isLogin);
+    document.getElementById('register-fields').classList.toggle('hidden', isLogin);
+    document.getElementById('confirm-pass-group').classList.toggle('hidden', isLogin);
+    document.getElementById('auth-btn').textContent = isLogin ? 'Iniciar sesión' : 'Crear cuenta';
+    document.getElementById('auth-sub-text').textContent = isLogin ? 'Bienvenido de nuevo 👋' : 'Únete a miles de estudiantes';
+    document.getElementById('auth-error').textContent = '';
+  }
+
+  function socialLogin(provider) {
+    currentUser = { name: 'Usuario ' + provider, email: provider.toLowerCase() + '@social.com' };
+    enterDashboard();
+  }
+
+  function doAuth() {
+    const isLogin = document.getElementById('tab-login').classList.contains('active');
+    const email = document.getElementById('auth-email').value.trim();
+    const pass = document.getElementById('auth-pass').value;
+    const err = document.getElementById('auth-error');
+
+    if (!email || !pass) { err.textContent = '⚠️ Por favor completa todos los campos.'; return; }
+
+    if (isLogin) {
+      if (!users[email]) { err.textContent = '❌ No existe una cuenta con ese correo.'; return; }
+      if (users[email].pass !== pass) { err.textContent = '❌ Contraseña incorrecta.'; return; }
+      currentUser = users[email];
+      enterDashboard();
+    } else {
+      const name = document.getElementById('reg-name').value.trim();
+      const pass2 = document.getElementById('auth-pass2').value;
+      if (!name) { err.textContent = '⚠️ Escribe tu nombre.'; return; }
+      if (pass !== pass2) { err.textContent = '❌ Las contraseñas no coinciden.'; return; }
+      if (users[email]) { err.textContent = '⚠️ Ya existe una cuenta con ese correo.'; return; }
+      users[email] = { name, email, pass, progress: {} };
+      currentUser = users[email];
+      enterDashboard();
+    }
+  }
+
+  function enterDashboard() {
+    document.getElementById('user-greeting').textContent = '¡Hola, ' + currentUser.name.split(' ')[0] + '! 👋';
+    document.getElementById('dash-name').textContent = '¡Hola, ' + currentUser.name.split(' ')[0] + '! 🎉';
+    showPage('dashboard');
+  }
+
+  function logout() {
+    currentUser = null;
+    showPage('home');
+  }
+
+  // ---- CONTACT ----
+  function sendContact() {
+    const name = document.getElementById('cf-name').value.trim();
+    const email = document.getElementById('cf-email').value.trim();
+    const msg = document.getElementById('cf-msg').value.trim();
+    if (!name || !email || !msg) { alert('Por favor completa todos los campos.'); return; }
+
+    const btn = document.querySelector('.btn-submit');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    emailjs.send('service_q3861mq', 'template_4inmvns', {
+      from_name: name,
+      from_email: email,
+      message: msg
+    }).then(() => {
+      document.getElementById('contact-success').classList.remove('hidden');
+      document.getElementById('cf-name').value = '';
+      document.getElementById('cf-email').value = '';
+      document.getElementById('cf-msg').value = '';
+      btn.textContent = 'Enviar mensaje 🚀';
+      btn.disabled = false;
+      setTimeout(() => document.getElementById('contact-success').classList.add('hidden'), 5000);
+    }).catch((error) => {
+      alert('❌ Error al enviar el mensaje. Por favor inténtalo de nuevo.\n' + error.text);
+      btn.textContent = 'Enviar mensaje 🚀';
+      btn.disabled = false;
+    });
+  }
+
+  // ---- BILLING TOGGLE ----
+  function toggleBilling() {
+    billingAnnual = !billingAnnual;
+    document.getElementById('billing-toggle').classList.toggle('annual', billingAnnual);
+    if (billingAnnual) {
+      document.getElementById('price-basic').textContent = '3,49€';
+      document.getElementById('period-basic').textContent = 'al mes, facturado anualmente';
+      document.getElementById('price-premium').textContent = '6,99€';
+      document.getElementById('period-premium').textContent = 'al mes, facturado anualmente';
+    } else {
+      document.getElementById('price-basic').textContent = '4,99€';
+      document.getElementById('period-basic').textContent = 'al mes';
+      document.getElementById('price-premium').textContent = '9,99€';
+      document.getElementById('period-premium').textContent = 'al mes';
+    }
+  }
+
+  function selectPlan(plan) {
+    alert('🎉 Has seleccionado el plan ' + plan + '.\nEn la versión completa aquí se procesará el pago.');
+  }
+
+  // ---- TOPIC ----
+  function showTopic(id) {
+    currentTopic = id;
+    const t = topics[id];
+    document.getElementById('topic-title').textContent = t.emoji + ' ' + t.name;
+    document.getElementById('topic-desc').textContent = t.desc;
+    document.getElementById('learn-content').innerHTML = t.learn;
+    switchTab('aprende');
+    resetQuiz();
+    showPage('topic');
+  }
+
+  function switchTab(tab) {
+    currentTab = tab;
+    document.getElementById('tab-aprende').classList.toggle('active', tab === 'aprende');
+    document.getElementById('tab-juega').classList.toggle('active', tab === 'juega');
+    document.getElementById('content-aprende').classList.toggle('hidden', tab !== 'aprende');
+    document.getElementById('content-juega').classList.toggle('hidden', tab !== 'juega');
+    if (tab === 'juega') renderQuiz();
+  }
+
+  // ---- QUIZ ----
+  function resetQuiz() {
+    quizState = { current: 0, correct: 0, wrong: 0, answered: false };
+  }
+
+  function renderQuiz() {
+    const qs = topics[currentTopic].questions;
+    document.getElementById('q-total').textContent = qs.length;
+    updateScoreBar();
+
+    if (quizState.current >= qs.length) {
+      showQuizDone(qs.length);
+      return;
+    }
+
+    const q = qs[quizState.current];
+    document.getElementById('q-current').textContent = quizState.current + 1;
+
+    let html = `<div class="quiz-card">
+      <div class="question-num">Pregunta ${quizState.current + 1} de ${qs.length}</div>
+      <div class="question-text">${q.q}</div>
+      <div class="answers-grid">`;
+    q.opts.forEach((opt, i) => {
+      html += `<button class="answer-btn" id="ans-${i}" onclick="selectAnswer(${i})">${opt}</button>`;
+    });
+    html += `</div><div id="quiz-feedback" class="hidden"></div>`;
+    html += `<button class="btn-next hidden" id="btn-next" onclick="nextQuestion()">Siguiente pregunta →</button>`;
+    html += `</div>`;
+    document.getElementById('quiz-container').innerHTML = html;
+  }
+
+  function selectAnswer(idx) {
+    if (quizState.answered) return;
+    quizState.answered = true;
+    const correct = topics[currentTopic].questions[quizState.current].correct;
+    const isCorrect = idx === correct;
+
+    // Disable all buttons
+    for (let i = 0; i < 4; i++) {
+      const btn = document.getElementById('ans-' + i);
+      if (!btn) continue;
+      btn.disabled = true;
+      if (i === correct) btn.classList.add('correct');
+      else if (i === idx) btn.classList.add('wrong');
+    }
+
+    if (isCorrect) {
+      quizState.correct++;
+      document.getElementById('quiz-feedback').textContent = '🎉 ¡Correcto! ¡Muy bien!';
+      document.getElementById('quiz-feedback').className = 'feedback correct';
+    } else {
+      quizState.wrong++;
+      document.getElementById('quiz-feedback').textContent = '❌ Incorrecto. La respuesta correcta estaba marcada en verde.';
+      document.getElementById('quiz-feedback').className = 'feedback wrong';
+    }
+    document.getElementById('quiz-feedback').classList.remove('hidden');
+    document.getElementById('btn-next').classList.remove('hidden');
+    updateScoreBar();
+
+    // Save to user progress
+    if (currentUser && currentUser.progress) {
+      const key = 'topic_' + currentTopic;
+      if (!currentUser.progress[key]) currentUser.progress[key] = { correct: 0, wrong: 0 };
+      if (isCorrect) currentUser.progress[key].correct++;
+      else currentUser.progress[key].wrong++;
+    }
+  }
+
+  function nextQuestion() {
+    quizState.current++;
+    quizState.answered = false;
+    renderQuiz();
+  }
+
+  function updateScoreBar() {
+    document.getElementById('score-correct').textContent = quizState.correct;
+    document.getElementById('score-wrong').textContent = quizState.wrong;
+  }
+
+  function showQuizDone(total) {
+    const pct = Math.round((quizState.correct / total) * 100);
+    let emoji = pct >= 80 ? '🏆' : pct >= 50 ? '😊' : '💪';
+    let msg = pct >= 80 ? '¡Excelente trabajo!' : pct >= 50 ? '¡Buen intento!' : '¡Sigue practicando!';
+
+    document.getElementById('quiz-container').innerHTML = `
+      <div class="quiz-done">
+        <span class="big-emoji">${emoji}</span>
+        <h2>${msg}</h2>
+        <div class="result-stat">✅ Respuestas correctas: ${quizState.correct} de ${total}</div>
+        <div class="result-stat">❌ Respuestas incorrectas: ${quizState.wrong}</div>
+        <div class="result-stat" style="color:var(--purple);font-size:1.3rem;margin-top:8px;">Puntuación: ${pct}%</div>
+        <button class="btn-retry" onclick="retryQuiz()">🔄 Intentar de nuevo</button>
+      </div>
+    `;
+    if (pct === 100) launchConfetti();
+  }
+
+  function retryQuiz() {
+    resetQuiz();
+    renderQuiz();
+  }
+
+  // ---- CONFETTI ----
+  function launchConfetti() {
+    const colors = ['#7C3AED','#EC4899','#FBBF24','#10B981','#3B82F6','#F97316'];
+    for (let i = 0; i < 60; i++) {
+      setTimeout(() => {
+        const el = document.createElement('div');
+        el.className = 'confetti-piece';
+        el.style.left = Math.random() * 100 + 'vw';
+        el.style.top = '-10px';
+        el.style.background = colors[Math.floor(Math.random() * colors.length)];
+        el.style.transform = `rotate(${Math.random()*360}deg)`;
+        el.style.animationDuration = (1.5
